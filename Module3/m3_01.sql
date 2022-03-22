@@ -11,6 +11,12 @@ RY KEY(id));
 ",3000);
 --select * from customers;
 
+--select name from customers;
+--select email from customers;
+--select amount from customers;
+
+-select amount as Purchase from customers;
+
 
 
 */
