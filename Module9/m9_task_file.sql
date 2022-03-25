@@ -73,11 +73,11 @@ inserted.The correct categories are classics,family,children. How
 
 would you update the record ensuring no wrong data is left?
 
---delete from film_category where film_id=(select film_id from film 
+delete from film_category where film_id=(select film_id from film 
 
 where film.title="WEST LION");
 
---insert into film_category(category_id,film_id)values((select 
+insert into film_category(category_id,film_id)values((select 
 
 category_id from category where category.name="Classics"),(select 
 
@@ -98,11 +98,11 @@ actors are DAN TORN,MAE HOFFMAN,SCARLETT DAMON. hOW WOULD YOU UPDATE
 
 THE RECORD IN THE SAFEST WAY?
 
---delete from film_actor where film_id=(select film_id from film 
+delete from film_actor where film_id=(select film_id from film 
 
 where film.title="WEST LION");
 
---INSERT into film_actor(actor_id,film_id)values((select actor_id 
+INSERT into film_actor(actor_id,film_id)values((select actor_id 
 
 from actor where actor.first_name="DAN" AND actor.last_name="TORN"),
 
@@ -124,7 +124,7 @@ Q20.the HARPER DYING movie is an animated movie with drama and
 
 comedy. assign these categories to the movie.
 
--- insert into film_category(category_id,film_id)values((select 
+ insert into film_category(category_id,film_id)values((select 
 
 category_id from category where category.name="Drama"),(select 
 
@@ -141,7 +141,7 @@ q19.the actor johnny lollobrigida was removed form the movie GRAIL
 
 FRANKESNSTEIN. HOW would you update that record?
 
---delete from film_actor where film_id=(select film_id form film 
+delete from film_actor where film_id=(select film_id form film 
 
 where film.title="grail frankenstein") and actor_id=(select actor_id 
 
@@ -152,15 +152,15 @@ actor.last_name="LOLLOBRIAGIDA");
 
 q18. Which actor acted in most movies?
 
---select actor_id,count(actor_id)from film_actor group by actor_id 
+select actor_id,count(actor_id)from film_actor group by actor_id 
 
 order by count(actor_id) desc limit 1;
 
 
 q17.Assign a new category thriller to the movie ANGELS LIFE.
 
---insert into category(name)values("Thriller");
---insert into film_category(film_id,category_id)values((select 
+insert into category(name)values("Thriller");
+insert into film_category(film_id,category_id)values((select 
 
 film_id from film where film.title="ANGELS LIFE"),(select category_id 
 
@@ -172,7 +172,7 @@ q16.Assign the cast: PENELOPE GUINESS, NICK WAHLBERG, JOESWANK to the
 
 movie "No Time to Die".
 
---insert into film_actor(actor_id,film_id)values((select actor_id 
+insert into film_actor(actor_id,film_id)values((select actor_id 
 
 form actor where actor.first_name="PENELOPE" AND 
 
@@ -196,7 +196,7 @@ Q15.Assign the category action,classics,drama to the movie "No Time
 
 to Die".
 
---insert into film_category(category_id,film_id)values((select 
+insert into film_category(category_id,film_id)values((select 
 
 category_id from category where category.name="Action"),(select 
 
@@ -206,13 +206,13 @@ film_id from film where film.title="No Time to Die")),
 ((select film_id from film where film.title="No Time to Die")),
 ((select category_id from category where category.name="Drama"),
 
-((select film_id from film where film.title="No Time to Die"))
+((select film_id from film where film.title="No Time to Die"));
 
 
 Q11.Get the details of the film with maximum length released in 2014.
 
 
---select *, language.name as language from film left join language on 
+select *, language.name as language from film left join language on 
 
 language.language_id=film.language_id where film.release_year="2014" 
 
@@ -221,7 +221,7 @@ and film.length=(select max(film.length)from film);
 
 q10.In which year least number of film were released?
 
---select film.title,film.release_year,count(film.release_year)as 
+select film.title,film.release_year,count(film.release_year)as 
 
 no_of_film from film group by  (film.release_year)order by count
 
@@ -230,7 +230,7 @@ no_of_film from film group by  (film.release_year)order by count
 
 q9.In which year most film were released?
 
---select film.title,film.release_year,count(film.release_year)as 
+select film.title,film.release_year,count(film.release_year)as 
 
 no_of_films from film group by (film.release_year) order by count
 
@@ -259,7 +259,7 @@ q7.The film alone trip(id:17) was actually released in Mandarin,
 update the info.
 
 
---update film set language_id=(select language.language_id from 
+update film set language_id=(select language.language_id from 
 
 language where language.name="English")where film.film_id=17;
 
@@ -278,9 +278,9 @@ film.language_id=language.language_id where film.release_year between
 
 q5.How many actors are from the united states?
 
---select count(*) from actor inner join address on 
+select count(*) from actor inner join address on 
 
-address.address.id=actor.address_id inner join city on 
+address.address_id=actor.address_id inner join city on 
 
 city.city_id=address.city_id inner join country on 
 
@@ -290,7 +290,7 @@ States";
 
 q4.Get the name of films of the actors who belong to india.
 
---select distinct film.title from film inner join film_actor on 
+select distinct film.title from film inner join film_actor on 
 
 film_actor.film_id=film.film_id inner join actor on 
 
@@ -305,7 +305,7 @@ country.country_id=city.country_id where country.country="India";
 
 q3.add the new actors(id:105,95)in film ARSENIC INDEPENDENCE(id:41)
 
---insert into film_actor(actor_id,film_id)values(115,41),(85,41)
+insert into film_actor(actor_id,film_id)values(115,41),(85,41)
 ON DUPLICATE KEY UPDATE film_id=values(film_id),actor_id=values
 
 (actor_id);
@@ -313,7 +313,7 @@ ON DUPLICATE KEY UPDATE film_id=values(film_id),actor_id=values
 
 q2.update the address of actor id 36 to "677 jazz Street".
 
---update address inner join actor on 
+update address inner join actor on 
 
 actor.address_id=address.address_id set address="677 Jaz Street" 
 
@@ -323,17 +323,7 @@ where actor.actor_id=36;
 q1.which categories of movies released in 2018? fetch with the number 
 
 of movies.
--select 
-
-category.name,category.category_id,film.release_year,film.film_id,cou
-
-nt(category.category_id)as number_of_films from category left join 
-
-film_category on film_category.category_id=category.category_id right 
-
-join film on film.film_id=film_category.cilm_id where 
-
-film.release_year="2018" group by category.category_id;
+-select category.name,category.category_id,film.release_year,film.film_id,count(category.category_id)as number_of_films from category left join film_category on film_category.category_id=category.category_id right join film on film.film_id=film_category.film_id where film.release_year="2018" group by category.category_id;
 
 
 
