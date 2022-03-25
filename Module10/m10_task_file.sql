@@ -302,6 +302,152 @@ insert into payments
 
 
 
+q21.get the address of the office of the employees that reports 
+
+to the employee whose id is 1102.
+
+select * from employees join reports_emp on 
+
+reports_emp.employee_id=employees.reports_to right join offices 
+
+on offices.office_code=employees.office_code where 
+
+employees.reports_to=""1102;
+
+
+
+
+q22.Get the details of the payments of classic cars.
+
+
+
+select *,customers.customer_id as done_by from payments left 
+
+join customers on customers.customer_id=payments.customer_id 
+
+right join orders on orders.customer_id=customers.customer_id 
+
+left join orderdetails on orderdetails.order_id=orders.order_id 
+
+left join products on 
+
+products.product_code=orderdetails.product_code where 
+
+products.product_line="Classic Cars";
+
+
+q23.
+
+how many customers ordered from the usa?
+
+
+select count(*)from customers left join orders on 
+
+orders.customer_id=customers.customer_id where 
+
+customers.country="USA";
+
+
+q24.get the comments regarding resolved orders.
+
+select orders.comments,orders.customer_id from orders where 
+
+orders.status="Resolved";
+
+25.fetch the details of employees/salesmen in the usa with 
+
+office addresses.
+
+
+select 
+
+*,offices.office_code,offices.addressline1,offices.addressline2
+
+,offices.phone,offices.city,offices.state,offices.country,offic
+
+es.postal_code,offices.territory from employees left join 
+
+offices on offices.office_code=employees.office_code where 
+
+offices.country="USA";
+
+
+26.fetch total price of each order of motorcycles
+
+
+select 
+
+orderdetails.product_code,products.product_name,product.product
+
+_line,orderdetails.quantity_orderd,orderdetails.each_price,orde
+
+rdetails.quantity_orderd*orderdetails.each_price as total_price 
+
+from orderdetails left join products on 
+
+products.product_code=orderdetails.product_code where 
+
+products.product_line="Motorcycles";
+
+
+27.get the total worth of all planes ordered.
+
+
+select sum
+
+(orderdetails.quantity_ordered*orderdetails.each_price)as 
+
+total_price from orderdetails left join products on 
+
+products.product_code=orderdetails.product_code where 
+
+products.product_line="Planes";
+
+
+28.how many customers belong to France?
+
+select count(*) from customers where 
+
+customers.country="France";
+
+
+29.get the payments of customers living in france.
+
+
+select 
+
+*,payments.payment_date,payments.amount,payments.check_number 
+
+from customers inner join payments on 
+
+payments.customer_id=customers.customer_id where 
+
+customers.country="France";
+
+q30.Get the office address of the employees / salesmen who 
+
+report to employee 1143.
+
+select distinct offices.office_code,
+offices.address_line1,offices.address_line2,offices.city,office
+
+s.phone,offices.state,offices.country,offices.postal_code,offic
+
+es.territory,employees.employee_id from offices left join 
+
+employees on offices.office_code=employees.office_code where 
+
+employees.reports_to=1143;
+
+
+
+
+
+
+
+
+
+
 
 
 
